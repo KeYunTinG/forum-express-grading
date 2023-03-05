@@ -2,7 +2,7 @@ const { Restaurant, User } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
 const adminController = {
   getRestaurants: (req, res, next) => {
-    Restaurant.findAll({
+    return Restaurant.findAll({
 
       raw: true
 
@@ -36,7 +36,7 @@ const adminController = {
       .catch(err => next(err))
   },
   getRestaurant: (req, res, next) => {
-    Restaurant.findByPk(req.params.id, { // 去資料庫用 id 找一筆資料
+    return Restaurant.findByPk(req.params.id, { // 去資料庫用 id 找一筆資料
       raw: true // 找到以後整理格式再回傳
     })
       .then(restaurant => {
@@ -59,7 +59,7 @@ const adminController = {
     const { name, tel, address, openingHours, description } = req.body
     if (!name) throw new Error('Restaurant name is required!')
     const { file } = req // 把檔案取出來
-    Promise.all([ // 非同步處理
+    return Promise.all([ // 非同步處理
       Restaurant.findByPk(req.params.id), // 去資料庫查有沒有這間餐廳
       imgurFileHandler(file) // 把檔案傳到 file-helper 處理
     ])
