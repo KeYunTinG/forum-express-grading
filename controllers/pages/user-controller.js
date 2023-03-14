@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs') // 載入 bcrypt
-const db = require('../models')
+const db = require('../../models')
 const assert = require('assert')
 const { User, Restaurant, Comment, Favorite, Like, Followship } = db
-const { imgurFileHandler } = require('../helpers/file-helpers')
-const helpers = require('../helpers/auth-helpers')
+const { imgurFileHandler } = require('../..//helpers/file-helpers')
+const helpers = require('../../helpers/auth-helpers')
 const userController = {
   signUpPage: (req, res) => {
     res.render('signup')
